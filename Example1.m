@@ -67,3 +67,14 @@ hold on
 surf(HEIGHT, WAIST, ModelOnGrid)
 plot3(heightC, waistC, weightmodel, 'r*')
 legend('Raw Data','Fitted Model')
+
+%% Test new function
+x = MedData.Age;
+y = MedData.BPDiff; %Pulse pressure
+modelCoeffs1 = fitQuadModel(x,y)
+
+height = MedData.Height; %x1
+waist = MedData.Waist; %x2
+weight = MedData.Weight; %y
+modelCoeffs2 = fitQuadModel([height,waist],weight)
+

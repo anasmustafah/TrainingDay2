@@ -18,7 +18,7 @@ end %fitQuadModel
 
 function [XClean, yClean] = removeNans(X,y);
 
-missingVals = any(isnan([X, y],2));
+missingVals = any(isnan([X, y]), 2);
 XClean = X(~missingVals, :);
 yClean = y(~missingVals);
 
