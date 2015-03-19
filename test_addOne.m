@@ -20,6 +20,23 @@ verifyEqual(T,actual,expected)
 
 end %testComplexNumber
 
+function testVector(T)
+input = [0; 0; 0; 0;];
+expected = [1; 1; 1; 1];
+actual = addOne(input);
+verifyEqual(T,actual,expected)
+
+end %testVector
+
+function testEye(T)
+input = eye(2);
+expected = [2 1; 1 2];
+actual = addOne(input);
+verifyEqual(T,actual,expected)
+
+end %testEye
+
+
 
 
 
