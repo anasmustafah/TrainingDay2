@@ -1,5 +1,6 @@
 function test = test_addOne()
-%TEST_ADDONE: Test harness for the "addOne" function
+% TEST_ADDONE: Test harness for the "addOne" function
+% addOne to any single input
 
 test = functiontests(localfunctions());
 end %test_addOne
@@ -71,23 +72,11 @@ verifyError(T, codeToEvaluate, 'MATLAB:invalidType')
 
 end %testNonDoubleNonChar
 
-% %Note: this is if NaN and Inf is unallowed
-% function testNaNInf(T)
-% %test for NaN
-% codeToEvaluate = @() addOne(NaN)
-% verifyError(T, codeToEvaluate, 'addOne:NaNinput')
-% 
-% %test for Inf
-% codeToEvaluate = @() addOne(Inf)
-% verifyError(T, codeToEvaluate, 'addOne:Infinput')
-% 
-% end %testNonDoubleNonChar
-
 function testNaNInf(T)
 %test for NaN
 input = NaN;
 expected = NaN;
-actual = addOne(NaN)
+actual = addOne(input)
 verifyEqual(T, actual, expected)
 
 %test for Inf
