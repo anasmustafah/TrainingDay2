@@ -1,0 +1,22 @@
+%% Basic performance measures
+%TIC/TOC
+
+tic; A=rand(1e3); toc
+
+%% Processing time.
+t1 = cputime;
+A=rand(1e3);
+t2 = cputime;
+delta_t = t2-t1
+
+%% 2013b onwards TIMEIT
+myFunc = @() rand(1e3);
+t_avg = timeit(myFunc)
+
+%% MATLAB profiler.
+profile on
+predictorRankings = findBestPredictors_debug()
+profile off
+profile viewer
+%Advanced exercise: use parallel computing on the cluster to
+%speed up this algorithm. Or, use the local resources.
