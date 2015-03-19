@@ -69,6 +69,8 @@ plot3(heightC, waistC, weightmodel, 'r*')
 legend('Raw Data','Fitted Model')
 
 %% Test new function
+load s02_MedData
+
 x = MedData.Age;
 y = MedData.BPDiff; %Pulse pressure
 modelCoeffs1 = fitQuadModel(x,y)

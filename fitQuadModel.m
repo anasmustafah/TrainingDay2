@@ -4,15 +4,21 @@ function [modelCoeffs] = fitQuadModel(X, y)
 %X can be a matrix for 2 or more input types.
 % See also Example1.m, surf, meshgrid, linspace, scatter, scatter3.
 
+%check we have the correct number of input
+narginchk(2,2)
+
+%error checking X
 validateattributes(X,{'double'},{'2d','real','nonempty'})
 if size(X,2) >= 3
-    error(fitQuadModel:TooManyCols','X must have 1 or 2 columns.')
+    error('fitQuadModel:TooManyCols','X must have 1 or 2 columns.')
 end %if sizeX
-if any(~isinf(X(:)))
+if any(isinf(X(:)))
     error('fitQuadModel:InfValues_X','X contains Inf or -Inf')
 end %if isinf
+
+%error checking y
 validateattributes(y,{'double'},{'2d','real','nonempty','column','numel',size(X,1)})
-if any(~isinf(y))
+if any(isinf(y))
     error('fitQuadModel:InfValues_y','y contains Inf or -Inf')
 end %if isinf
 
@@ -24,7 +30,6 @@ modelCoeffs = fitModel(XClean, yClean);
 
 %Visualise the results.
 % visResults(X, y, XClean, modelCoeffs)
-
 
 end %fitQuadModel
 

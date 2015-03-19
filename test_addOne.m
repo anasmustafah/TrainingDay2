@@ -4,6 +4,7 @@ function test = test_addOne()
 test = functiontests(localfunctions());
 end %test_addOne
 
+%Verify function's application
 function testScalarDouble(T)
 input = 1;
 expected = 2;
@@ -44,7 +45,58 @@ verifyEqual(T,actual,expected,'AbsTol', 1e-6)
 
 end %testChar
 
+%Verify the error responses
+
+function testNargin(T)
+%test with zero input.
+codeToEvaluate = @() addOne();
+verifyError(T, codeToEvaluate, 'MATLAB:narginchk:notEnoughInputs')
+
+%test with too many inputs.
+codeToEvaluate = @() addOne(1,1)
+verifyError(T, codeToEvaluate, 'MATLAB:TooManyInputs')
+
+end
+
+function testEmpty(T)
+codeToEvaluate = @() addOne(double.empty())
+%Note: [] is the same as double.empty
+verifyError(T, codeToEvaluate, 'MATLAB:expectedNonempty')
+
+end %testEmpty
+
+function testNonDoubleNonChar(T)
+codeToEvaluate = @() addOne(single(1))
+verifyError(T, codeToEvaluate, 'MATLAB:invalidType')
+
+end %testNonDoubleNonChar
+
+% %Note: this is if NaN and Inf is unallowed
+% function testNaNInf(T)
+% %test for NaN
+% codeToEvaluate = @() addOne(NaN)
+% verifyError(T, codeToEvaluate, 'addOne:NaNinput')
+% 
+% %test for Inf
+% codeToEvaluate = @() addOne(Inf)
+% verifyError(T, codeToEvaluate, 'addOne:Infinput')
+% 
+% end %testNonDoubleNonChar
+
+function testNaNInf(T)
+%test for NaN
+input = NaN;
+expected = NaN;
+actual = addOne(NaN)
+verifyEqual(T, actual, expected)
+
+%test for Inf
+input = [Inf, -Inf];
+expected = [Inf, -Inf];
+actual = addOne(input)
+verifyEqual(T, actual, expected)
+
+end %testNonDoubleNonChar
 
 
-
-
+% 
